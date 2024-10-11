@@ -12,6 +12,7 @@ export default new Vuex.Store({
     state: {
         token: null,
         user: null,
+        userType: null,  // Add userType in state
         isUserLoggedIn: false,
     },
     mutations: {
@@ -21,6 +22,9 @@ export default new Vuex.Store({
         },
         setUser(state, user) {
             state.user = user
+        },
+        setUserType(state, userType) {  // Add mutation for setting userType
+            state.userType = userType
         }
     },
     actions: {
@@ -29,6 +33,9 @@ export default new Vuex.Store({
         },
         setUser({ commit }, user) {
             commit('setUser', user)
+        },
+        setUserType({ commit }, userType) {  // Add action for setting userType
+            commit('setUserType', userType)
         }
     }
 });

@@ -1,41 +1,63 @@
 <template>
-  <div>
+  <div class="user-detail-container">
     <h1>Show User</h1>
-    <p>ID: {{ user.id }} </p>
-    <p>Name: {{ user.id }} </p>
-    <p>Lastname: {{ user.lastname }} </p>
-    <p>Email: {{ user.email }}</p>
-    <p>Password: {{ user.password }}</p>
-    <p>Status: {{ user.status }}</p>
-    <p>Type: {{ user.type }}</p>
-    <p>Created At: {{ user.createdAt }}</p>
+
+    <div class="user-detail">
+      <p><b>ID:</b> {{ user.id }}</p>
+      <p><b>Name:</b> {{ user.name }}</p>
+      <p><b>Lastname:</b> {{ user.lastname }}</p>
+      <p><b>Email:</b> {{ user.email }}</p>
+      <p><b>Password:</b> {{ user.password }}</p>
+      <p><b>Status:</b> {{ user.status }}</p>
+      <p><b>Type:</b> {{ user.type }}</p>
+      <p><b>Created At:</b> {{ new Date(user.createdAt).toLocaleString() }}</p>
+    </div>
   </div>
 </template>
 
 <script>
 import UsersService from "@/services/UsersService";
 
-export default { 
-  data(){
+export default {
+  data() {
     return {
-      user: {}
-    }
+      user: {},
+    };
   },
   async created() {
-    try{
-      var userId = this.$route.params.userId;
+    try {
+      const userId = this.$route.params.userId;
       this.user = (await UsersService.show(userId)).data;
-    }catch(err){
-      console.log(err);
+    } catch (err) {
+      console.error(err);
     }
-    
-    // console.log(this.user);
   },
-  
-
-}
+};
 </script>
 
-<style>
+<style scoped>
+.user-detail-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.user-detail p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.user-detail p b {
+  color: #555;
+}
 </style>
